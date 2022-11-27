@@ -45,7 +45,7 @@ export default function Diet({ diet }) {
       <div class="flex justify-center mt-3 w-full max-w-xl">
         <ul class="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
           {diet.map((item) => (
-            <li class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
+            <li key={item._id} class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
           ))}
         </ul>
       </div>

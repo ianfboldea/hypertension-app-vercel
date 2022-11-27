@@ -54,7 +54,7 @@ export default function Appointments({ appointments }) {
       <div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
           <div class="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
             <div class="w-full">
-              <h2 class="text-2xl text-gray-900 font-bold md:text-4xl">Let's schedule a new appointment!</h2>
+              <h2 class="text-2xl text-gray-900 font-bold md:text-4xl">Let&apos;s schedule a new appointment!</h2>
               <form class="w-full max-w-lg mt-6 flex flex-row gap-3">
                 <input type="date" id="appointment-date" name="trip-start" class="px-4 py-2 rounded shadow leading-tight"></input>
                 <div class="inline-block relative w-64">

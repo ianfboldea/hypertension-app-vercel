@@ -32,7 +32,7 @@ export default function NotificationCard({ appointments }) {
         <div class="notification-card-container" id="notification-card">
             <span onClick={e => handleClick(e)}>&times;</span>
             <h1>Hey, Ian!</h1>
-            <p>Just wanted to let you know you've got an appointment coming up in {days_until_appointment} days!</p>
+            <p>Just wanted to let you know you&apos;ve got an appointment coming up in {days_until_appointment} days!</p>
         </div>}
       </>
     )

@@ -45,7 +45,7 @@ export default function IndexPage({ appointments }) {
       <div class="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
         
         <div class="md:8/12 lg:w-7/12">
-          <h2 class="text-2xl text-gray-900 font-bold md:text-4xl">We're here to help</h2>
+          <h2 class="text-2xl text-gray-900 font-bold md:text-4xl">We&apos;re here to help</h2>
           <p class="mt-6 text-gray-600">Living with hypertension can be difficult. To get started with the hypertension assistant, you can begin by logging your appointments, tracking your diet, or recording your exercise. </p>
           <div class="inline-block mt-6">
           <Link href="/appointments">
