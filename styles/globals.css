@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.notification-card-container {
+    position: fixed;
+    display: block;
+    width: 15rem;
+    border-radius: 10px;
+    border: 1px solid darkgrey;
+    background-color: #EFEFEF;
+    padding: 1rem;
+    right: 2em;
+    bottom: 2em;
+}
+
+.notification-card-container h1 {
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.notification-card-container span {
+    position: absolute;
+    top: 5px;
+    cursor: pointer;
+    right: 15px;
+}
