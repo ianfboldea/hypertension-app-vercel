@@ -11,6 +11,7 @@ import { getSession } from 'next-auth/react'
 import Link from 'next/link'
 
 export default function IndexPage({ appointments }) {
+  const { data: session } = useSession()
   return (
     <>
         <div class="py-16 bg-white">  
@@ -40,6 +41,7 @@ export default function IndexPage({ appointments }) {
   </div>
 </div>
 
+{session &&
 <div class="py-16 bg-blue-50">  
   <div class="container m-auto px-6 text-gray-600 md:px-12 xl:px-6">
       <div class="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
@@ -72,7 +74,8 @@ export default function IndexPage({ appointments }) {
       </div>
   </div>
 </div>
-<NotificationCard appointments={appointments} />
+}
+<NotificationCard appointments={appointments} name={session.user.name} />
     </>
   )
 }

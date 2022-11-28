@@ -2,7 +2,7 @@ import Link from "next/link"
 import { useSession } from "next-auth/react"
 import { useState, setState } from "react"
 
-export default function NotificationCard({ appointments }) {
+export default function NotificationCard({ appointments, name }) {
   const handleClick = async (e) => {
     e.preventDefault()
     document.getElementById('notification-card').style.display = 'None'
@@ -31,7 +31,7 @@ export default function NotificationCard({ appointments }) {
         {days_until_appointment &&
         <div class="notification-card-container" id="notification-card">
             <span onClick={e => handleClick(e)}>&times;</span>
-            <h1>Hey, Ian!</h1>
+            <h1>Hey, {name}!</h1>
             <p>Just wanted to let you know you&apos;ve got an appointment coming up in {days_until_appointment} days!</p>
         </div>}
       </>
