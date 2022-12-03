@@ -12,10 +12,11 @@ export default function Training({ training }) {
     const trainingType = document.getElementById('training-type').value
     const trainingDate = document.getElementById('training-date').value
     const trainingTime = document.getElementById('training-time').value
+    const trainingDuration = document.getElementById('training-duration').value
     fetch(
       `/api/training`,
       {
-        body: JSON.stringify({date: trainingDate, type: trainingType, time: trainingTime, name: session.user.name}),
+        body: JSON.stringify({date: trainingDate, type: trainingType, time: trainingTime, duration: trainingDuration, name: session.user.name}),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -30,27 +31,35 @@ export default function Training({ training }) {
   }
   return (
     <div class="py-16 bg-white center flex flex-col items-center">  
-    <h2 class="text-2xl text-gray-900 font-bold md:text-4xl py-5">Training Log</h2>
+    <h2 class="text-2xl text-gray-900 font-bold md:text-4xl py-5">Excercise Log</h2>
     <div class="flex justify-center">
       <ul class="bg-white rounded-lg border border-gray-200 w-128 text-gray-900">
         {training.map((train) => (
-          <li key={train._id} class="px-6 py-2 border-b border-gray-200 w-full">{train.type} workout at {train.time} on {train.date}</li>
+          <li key={train._id} class="px-6 py-2 border-b border-gray-200 w-full">{train.date} | {train.type} workout at {train.time} for {train.duration} minutes</li>
         ))}
       </ul>
     </div>
     <form class="w-full max-w-xl mt-6 flex flex-row gap-3">
       <div class="inline-block relative w-36">
-      <select id="training-type" class="block appearance-none w-full bg-white hover:border-gray-500 px-4 py-3 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
-        <option>Running</option>
-        <option>Weight Training</option>
-        <option>Swimming</option>
-      </select>
-      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+        <label>Workout</label>
+        <select id="training-type" class="block appearance-none w-full bg-white hover:border-gray-500 px-4 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+          <option>Running</option>
+          <option>Weight Training</option>
+          <option>Swimming</option>
+        </select>
       </div>
+      <div class="flex flex-col">
+        <label for="trip-start">Date of Training</label>
+        <input type="date" id="training-date" name="trip-start" class="px-4 py-2 rounded shadow leading-tight w-32" required></input>
       </div>
-      <input type="date" id="training-date" name="trip-start" class="px-4 py-2 rounded shadow leading-tight" required></input>
-      <input type="time" id="training-time" name="training" min="09:00" max="18:00" class="px-4 py-2 rounded shadow leading-tight" required></input>
+      <div class="flex flex-col">
+        <label for="training">Time</label>
+        <input type="time" id="training-time" name="training" min="09:00" max="18:00" class="px-4 py-2 rounded shadow leading-tight w-24" required></input>
+      </div>
+      <div class="flex flex-col">
+        <label for="duration">Duration</label>
+        <input type="number" id="training-duration" name="duration" min="09:00" max="18:00" class="px-4 py-2 rounded shadow leading-tight w-24" defaultValue="60" required></input>
+      </div>
       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" onClick={e => handleClick(e)}>
         Submit
       </button>

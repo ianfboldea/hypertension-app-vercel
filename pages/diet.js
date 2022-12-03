@@ -9,16 +9,20 @@ import { useSession } from 'next-auth/react'
 
 export default function Diet({ diet }) {
   const { data: session } = useSession()
+  useEffect(() => {
+    document.getElementById('training-date').value = (new URLSearchParams(window.location.search)).get('date')
+  })
   const handleClick = async (e) => {
     e.preventDefault()
     const foodName = document.getElementById('food-name').value
-    const date = document.getElementById('training-date').value
+    const date = (new URLSearchParams(window.location.search)).get('date')
     const quantity = parseInt(document.getElementById('food-quantity').value)
     const cals = parseInt(document.getElementById('cals-per-item').value) * quantity
+    const category = document.getElementById('meal-type').value
     fetch(
       `/api/diet`,
       {
-        body: JSON.stringify({date: date, foodName: foodName, name: session.user.name, quantity: quantity, cals: cals}),
+        body: JSON.stringify({date: date, foodName: foodName, name: session.user.name, quantity: quantity, cals: cals, category: category}),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -42,22 +46,57 @@ export default function Diet({ diet }) {
       <form class="w-full max-w-xl mt-6 flex flex-col gap-3">
         <input type="date" id="training-date" name="trip-start" class="px-4 py-2 rounded shadow leading-tight" defaultValue={query.date} onChange={e => handleOnChange(e)}></input>
       </form>
-      <div class="flex justify-center mt-3 w-full max-w-xl">
+      <div class="flex flex-col justify-center mt-3 w-full max-w-xl">
+      <h4 class="text-gray-900 font-bold md:text-4xl py-2">Breakfast</h4>
         <ul class="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
           {diet.map((item) => (
-            <li key={item._id} class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
+            item.category == 'Breakfast' && <li key={item._id} class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
           ))}
         </ul>
       </div>
-      <div class="flex justify-center mt-2 w-full max-w-xl">
+      <div class="flex flex-col justify-center mt-3 w-full max-w-xl">
+        <h4 class="text-gray-900 font-bold md:text-4xl py-2">Lunch</h4>
+        <ul class="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
+          {diet.map((item) => (
+            item.category == 'Lunch' && <li key={item._id} class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="flex flex-col justify-center mt-3 w-full max-w-xl">
+        <h4 class="text-gray-900 font-bold md:text-4xl py-2">Dinner</h4>
+        <ul class="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
+          {diet.map((item) => (
+            item.category == 'Dinner' && <li key={item._id} class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="flex flex-col justify-center mt-2 w-full max-w-xl">
+        <h4 class="text-gray-900 font-bold md:text-4xl py-2">Total</h4>
         <ul class="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
           <li class="px-6 py-2 border-b border-gray-200 w-full"><strong>{diet.reduce((accumulator, foodEntry) => { return accumulator + foodEntry.cals; }, 0)} total calories</strong></li>
         </ul>
       </div>
       <form class="w-full max-w-xl mt-6 flex flex-row gap-3">
-        <input id="food-name" class="block appearance-none w-full bg-white hover:border-gray-500 px-2 py-3 rounded shadow leading-tight focus:outline-none focus:shadow-outline" placeholder="Food name" required></input>
-        <input type="number" id="food-quantity" defaultValue="1" class="px-2 py-2 rounded shadow leading-tight w-16" required></input>
-        <input type="number" id="cals-per-item" name="cals" defaultValue="100" class="px-2 py-2 rounded shadow leading-tight w-16" required></input>
+        <div class="flex flex-col">
+          <label>Food Name</label>
+          <input id="food-name" class="block appearance-none w-full bg-white hover:border-gray-500 px-2 py-3 rounded shadow leading-tight focus:outline-none focus:shadow-outline w-32" placeholder="Steak" required></input>
+        </div>
+        <div class="flex flex-col">
+          <label>Quantity</label>
+          <input type="number" id="food-quantity" defaultValue="1" class="px-2 py-3 rounded shadow leading-tight w-16" required></input>
+        </div>
+        <div class="flex flex-col">
+          <label>Cals per Item</label>
+          <input type="number" id="cals-per-item" name="cals" defaultValue="100" class="px-2 py-3 rounded shadow leading-tight w-24" required></input>
+        </div>
+        <div class="inline-block relative w-36">
+          <label>Meal</label>
+          <select id="meal-type" class="block appearance-none w-full bg-white hover:border-gray-500 px-4 py-3 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
+            <option>Breakfast</option>
+            <option>Lunch</option>
+            <option>Dinner</option>
+          </select>
+        </div>
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded focus:outline-none focus:shadow-outline" type="button" onClick={e => handleClick(e)}>
           Submit
         </button>

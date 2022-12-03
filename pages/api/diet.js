@@ -14,7 +14,7 @@ export default async (req, res) => {
                 
             const diet = await db
                 .collection("diet")
-                .insertOne( { user_id: user.id, date: req.body.date, cals: req.body.cals, quantity: req.body.quantity, foodName: req.body.foodName } )
+                .insertOne( { user_id: user.id, date: req.body.date, cals: req.body.cals, quantity: req.body.quantity, foodName: req.body.foodName, category: req.body.category } )
 
             res.json(diet)
         } catch (e) {

@@ -56,14 +56,14 @@ export default function IndexPage({ appointments }) {
               Appointments
             </button>
           </Link>
-          <Link href={"/diet?date="+(new Date()).getFullYear() + '-' + ((new Date()).getMonth()+1) + '-' + (new Date()).getDate()}>
+          <Link href={"/diet?date=" + (new Date()).getFullYear() + '-' + ((new Date()).getMonth()+1 > 9 ? (new Date()).getMonth()+1 : '0' + ((new Date()).getMonth()+1) ) + '-' + ((new Date()).getDate() > 9 ? (new Date()).getDate() : '0' + ((new Date()).getDate()) )}>
             <button class=" mr-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
               Diet
             </button>
           </Link>
           <Link href="/training">
             <button class=" mr-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-              Training
+              Excercise
             </button>
           </Link>
           </div>
@@ -77,9 +77,9 @@ export default function IndexPage({ appointments }) {
 </div>
 <NotificationCard appointments={appointments} name={session.user.name} />
 </>
-    
 }
-</>
+
+    </>
   )
 }
 

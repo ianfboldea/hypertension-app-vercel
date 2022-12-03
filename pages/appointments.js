@@ -43,7 +43,13 @@ export default function Appointments({ appointments }) {
               <h2 class="text-2xl text-gray-900 font-bold md:text-4xl">Upcoming Appointments</h2>
               <ul class="ml-4 list-disc mt-2">
               {appointments.map((appointment) => (
-                new Date(appointment.date) > Date.now() && <li><strong>{appointment.visit}: </strong>{appointment.date}</li>
+                new Date(appointment.date) >= Date.now() && <li><strong>{appointment.visit}: </strong>{appointment.date}</li>
+              ))}
+              </ul>
+              <h2 class="text-2xl text-gray-900 font-bold md:text-4xl mt-4">Past Appointments</h2>
+              <ul class="ml-4 list-disc mt-2">
+              {appointments.map((appointment) => (
+                new Date(appointment.date) < Date.now() && <li><strong>{appointment.visit}: </strong>{appointment.date}</li>
               ))}
               </ul>
             </div>

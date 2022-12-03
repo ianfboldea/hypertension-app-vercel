@@ -14,7 +14,7 @@ export default async (req, res) => {
                 
             const training = await db
                 .collection("training")
-                .insertOne( { user_id: user.id, date: req.body.date, type: req.body.type, time: req.body.time } )
+                .insertOne( { user_id: user.id, date: req.body.date, type: req.body.type, time: req.body.time, duration: req.body.duration } )
 
             res.json(training)
         } catch (e) {
