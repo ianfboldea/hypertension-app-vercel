@@ -47,7 +47,7 @@ export default function Diet({ diet }) {
         <input type="date" id="training-date" name="trip-start" class="px-4 py-2 rounded shadow leading-tight" defaultValue={query.date} onChange={e => handleOnChange(e)}></input>
       </form>
       <div class="flex flex-col justify-center mt-3 w-full max-w-xl">
-      <h4 class="text-gray-900 font-bold md:text-4xl py-2">Breakfast</h4>
+        <h4 class="text-gray-900 font-bold md:text-4xl py-2">Breakfast</h4>
         <ul class="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
           {diet.map((item) => (
             item.category == 'Breakfast' && <li key={item._id} class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
@@ -67,6 +67,14 @@ export default function Diet({ diet }) {
         <ul class="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
           {diet.map((item) => (
             item.category == 'Dinner' && <li key={item._id} class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="flex flex-col justify-center mt-3 w-full max-w-xl">
+        <h4 class="text-gray-900 font-bold md:text-4xl py-2">Supper</h4>
+        <ul class="bg-white rounded-lg border border-gray-200 w-full text-gray-900">
+          {diet.map((item) => (
+            item.category == 'Supper' && <li key={item._id} class="px-6 py-2 border-b border-gray-200 w-full"><strong>{item.cals} cals:</strong> {item.quantity} {item.foodName}</li>
           ))}
         </ul>
       </div>
