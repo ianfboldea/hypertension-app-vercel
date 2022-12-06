@@ -21,7 +21,7 @@ export default function NotificationCard({ appointments, name }) {
         const oneDay = 24 * 60 * 60 * 1000
         const firstDate = new Date(upcoming_appointment.date)
         const secondDate = new Date()
-        days_until_appointment = Math.round(Math.abs((firstDate - secondDate) / oneDay))
+        days_until_appointment = Math.ceil(Math.abs((firstDate - secondDate) / oneDay))
       }
       console.log(days_until_appointment)
     }
