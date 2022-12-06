@@ -19,9 +19,8 @@ export default function NotificationCard({ appointments, name }) {
       }
       if (upcoming_appointment) {
         const oneDay = 24 * 60 * 60 * 1000
-        const firstDate = new Date(upcoming_appointment.date)
+        const firstDate = new Date(upcoming_appointment.date.split("-")[1] + '-' + upcoming_appointment.date.split("-")[2] + '-' + upcoming_appointment.date.split("-")[0])
         const secondDate = new Date()
-        firstDate.setHours(0, 0, 0, 0)
         secondDate.setHours(0, 0, 0, 0)
         days_until_appointment = Math.ceil(Math.abs((firstDate - secondDate) / oneDay))
       }
